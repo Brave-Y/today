@@ -67,32 +67,36 @@ export default {
     }
   },
   methods: {
-    doLogin () {
+    async doLogin () {
       // 1. 收集用户的信息
       const { mobile, code } = this.form
-
       // 2. axios发ajax请求
       this.isLoading = true // 正在请求
-      this.$http({
-        method: 'POST',
-        url: 'mp/v1_0/authorizations',
-        data: {
-          mobile,
-          code
-        }
-      }).then(res => {
-        // alert('登陆成功')
+      try {
+        const res = await this.$http({
+          method: 'POST',
+          url: 'mp/v1_0/authorizations',
+          data: {
+            mobile,
+            code
+          }
+        })
+        // -------------成功----------
+        // 1. 提示
         this.$message.success('登陆成功')
         this.isLoading = false // 请求结束
-      }).catch(err => {
+        // 2. 把token保存到本地
+        localStorage.setItem('tokenStr', res.data.data.token)
+        // 3. 跳转到主页
+        this.$router.push('/')
+      } catch (err) {
         console.log(err)
         // alert('登陆失败')
         // eslint-disable-next-line no-proto
         // this.__proto__.__proto__.$message.error('错了哦，这是一条错误消息')
         this.$message.error('错了哦，这是一条错误消息')
         this.isLoading = false // 请求结束
-      })
-      // 3. 根据反馈结果，做后续操作
+      }
     },
     Ylogin () {
       // this.$refs.refForm是用来获取对表单组件的引用
@@ -107,6 +111,35 @@ export default {
     }
   }
 }
+// doLogin () {
+//   // 1. 收集用户的信息
+//   const { mobile, code } = this.form
+//   // 2. axios发ajax请求
+//   this.isLoading = true // 正在请求
+//   this.$http({
+//     method: 'POST',
+//     url: 'mp/v1_0/authorizations',
+//     data: {
+//       mobile,
+//       code
+//     }
+//   }).then(res => {
+//     // alert('登陆成功')
+//     this.$message.success('登陆成功')
+//     this.isLoading = false // 请求结束
+//     localStorage.setItem('tokenStr', res.data.data.token)
+//     // 跳转页面
+//     this.$router.push('/')
+//   }).catch(err => {
+//     console.log(err)
+//     // alert('登陆失败')
+//     // eslint-disable-next-line no-proto
+//     // this.__proto__.__proto__.$message.error('错了哦，这是一条错误消息')
+//     this.$message.error('错了哦，这是一条错误消息')
+//     this.isLoading = false // 请求结束
+//   })
+//   // 3. 根据反馈结果，做后续操作
+// },
 </script>
 <style scoped lang="less">
 // 铺满整屏
