@@ -71,7 +71,7 @@
       </el-header>
       <el-main class="main">
         <!-- 子路由出口 -->
-        <router-view />
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>

@@ -8,6 +8,8 @@ import Layout from '../views/layout.vue'
 import Article from '../views/articles/article.vue'
 // 素材管理
 import image from '../views/image/image.vue'
+// 编辑
+import edit from '../views/articles/edit.vue'
 // 404
 import Page404 from '../views/page404/page404.vue'
 
@@ -19,7 +21,9 @@ const routes = [
     component: Layout,
     children: [
       { path: '/articles', component: Article },
-      { path: '/image', component: image }
+      { path: '/image', component: image },
+      // 动态路由
+      { path: '/edit/:id', component: edit }
     ]
   },
   {

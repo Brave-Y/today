@@ -25,6 +25,7 @@
 <script>
 // import axios from '@/utils/request.js'
 export default {
+  name: 'login',
   data () {
     return {
       rules: {
