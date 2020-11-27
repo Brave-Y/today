@@ -10,6 +10,10 @@ import Article from '../views/articles/article.vue'
 import image from '../views/image/image.vue'
 // 编辑
 import edit from '../views/articles/edit.vue'
+// 添加页
+import AddArticle from '../views/articles/add.vue'
+// home
+import Home from '../views/home/home.vue'
 // 404
 import Page404 from '../views/page404/page404.vue'
 
@@ -20,8 +24,10 @@ const routes = [
     path: '/',
     component: Layout,
     children: [
+      { path: '', component: Home },
       { path: '/articles', component: Article },
       { path: '/image', component: image },
+      { path: '/addArticle', component: AddArticle },
       // 动态路由
       { path: '/edit/:id', component: edit }
     ]

@@ -9,13 +9,16 @@ import router from './router'
 import './style/index.less'
 // 引入内容管理组件
 import MyBreadcrumb from '@/components/breadcrumb.vue'
-
+import MyChannel from '@/components/channel.vue'
+import MyCover from '@/components/cover.vue'
 // 引入axios
 // @: 表示一个别名，它就指向src。
 import axios from '@/utils/request.js'
 
 // 注册全局组件
 Vue.component('MyBreadcrumb', MyBreadcrumb)
+Vue.component('MyChannel', MyChannel)
+Vue.component('MyCover', MyCover)
 
 // 引入json-bigint
 // import JSONbig from 'json-bigint'
