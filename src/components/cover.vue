@@ -78,7 +78,7 @@
 <script>
 import defaultImg from '@/assets/default.png'
 export default {
-  name: 'cover',
+  name: 'Cover',
   props: ['value'],
   data () {
     return {
@@ -98,13 +98,11 @@ export default {
       curPage: 1, // 当前是哪一页
       isCollected: false, //  是否收藏
       total_count: 0, // 总条数
-
-      //
+      // 控制对话框显示隐藏
       dialogVisible: false,
       activeName: 'images' // 默认选中素材库
     }
   },
-
   methods: {
     // 用户点击了确认按钮
     hConfirm () {

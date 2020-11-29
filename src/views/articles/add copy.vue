@@ -3,37 +3,41 @@
     <div slot="header" class="clearfix">
       <my-breadcrumb>发布文章</my-breadcrumb>
     </div>
+    <!--
+      1. ref:myForm: 在后面我们需要手动去调用表单检验的方法，所以这里要给它加引用。
+      2. rules="rules": 约定检验规则
+      3. model="form": 配合检验一起使用的 -->
     <el-form label-width="80px"
-    ref="form" :rules="rules" :model="form">
-      <el-form-item label="标题:" prop="title">
+    ref="myForm"
+    :rules="rules"
+    :model="form">
+      <el-form-item label="标题" prop="title">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
-<el-form-item label="内容:" prop="content">
-   <quill-editor v-model="form.content" :options="editorOption"></quill-editor>
+      <el-form-item label="内容" prop="content">
+        <quill-editor v-model="form.content" :options="editorOption"></quill-editor>
       </el-form-item>
-      <!-- 封面开始 -->
-<el-form-item label="封面">
-          <el-radio-group v-model="form.coverType" @change="hImageTypeChange">
-            <el-radio :label="1" name="type">单图</el-radio>
-            <el-radio :label="3" name="type">三图</el-radio>
-            <el-radio :label="0" name="type">无图</el-radio>
-            <el-radio :label="-1" name="type">自动</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="" v-if="form.coverType>0">
-          <el-row>
-            <el-col :span="6" v-for="(item,idx) in form.coverType" :key="idx">
-                {{idx}}
-                <my-cover v-model="form.coverImages[idx]"/>
-            </el-col>
-          </el-row>
-        </el-form-item>
-        <!-- 封面结束 -->
+      <el-form-item label="封面">
+        <el-radio-group v-model="form.coverType" @change="hImageTypeChange">
+          <el-radio :label="1">单图</el-radio>
+          <el-radio :label="3">三图</el-radio>
+          <el-radio :label="0">无图</el-radio>
+          <el-radio :label="-1">自动</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item v-if="form.coverType > 0">
+        <el-row>
+          <el-col :span="6" v-for="(item, idx) in form.coverType" :key="item">
+            {{idx}}
+            <my-cover v-model="form.coverImages[idx]"/>
+          </el-col>
+        </el-row>
+      </el-form-item>
       <my-channel v-model="form.channelId"></my-channel>
-<el-form-item>
-          <el-button type="primary" @click="hPublish(false)">发表</el-button>
-          <el-button @click="hPublish(true)">存入草稿</el-button>
-        </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="hPublish(false)">发布</el-button>
+        <el-button @click="hPublish(true)">存入草稿</el-button>
+      </el-form-item>
     </el-form>
   </el-card>
 </template>
@@ -53,10 +57,10 @@ export default {
     return {
       // 富文本配置对象
       editorOption: {
-      // 占位配置
+        // 占位配置
         placeholder: '',
         modules: {
-        // 配置工具栏
+          // 配置工具栏
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
             ['blockquote', 'code-block'],
@@ -72,7 +76,6 @@ export default {
         content: '适合去爬山，有约的吗？ 不回来了的那种？ 来来来！',
         coverType: 0, // 封面图的类型, 默认是无图
         coverImages: [], // 封面图的地址
-        cover: '',
         channelId: ''
       },
       rules: {
@@ -104,7 +107,7 @@ export default {
     // 默认: 不是草稿
     hPublish (draft) {
       // 1. 验证数据有效性
-      this.$refs.form.validate(valid => {
+      this.$refs.myForm.validate(valid => {
         if (valid) {
           this.doPublish(draft)
         }
@@ -112,6 +115,8 @@ export default {
     },
     async doPublish (draft) {
       console.log('draft', draft)
+      // 发送完请求 将isLoading置位true
+      this.isLoading = true
       try {
         const { title, content, channelId, coverType, coverImages } = this.form
         // 2. 调用接口实现添加
@@ -140,9 +145,10 @@ export default {
       }
     }
   }
+
 }
 </script>
-<style lang='less'  scoped>
+<style lang="less" scoped>
 // 在父组件中去设置子组件的样式，加上/deep/ 实现穿透功能
 .publish-container /deep/ .ql-container{
   height: 300px;

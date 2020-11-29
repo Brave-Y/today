@@ -15,7 +15,7 @@ import MyCover from '@/components/cover.vue'
 // @: 表示一个别名，它就指向src。
 import axios from '@/utils/request.js'
 
-// 注册全局组件
+// 注册全局组件--标题及面包屑
 Vue.component('MyBreadcrumb', MyBreadcrumb)
 Vue.component('MyChannel', MyChannel)
 Vue.component('MyCover', MyCover)

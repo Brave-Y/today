@@ -18,7 +18,6 @@ import Home from '../views/home/home.vue'
 import Page404 from '../views/page404/page404.vue'
 
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',

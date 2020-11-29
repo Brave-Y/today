@@ -1,7 +1,8 @@
 <template>
-  <el-form-item label="频道">
+  <el-form-item label="频道" prop="channelId">
     <el-select
       v-model="channelId"
+      @change="hChange"
       placeholder="请选择频道">
       <el-option
       v-for="channel in channelList"
@@ -20,16 +21,30 @@
 //   - v-for循环绑定数据
 export default {
   name: 'channel',
+  props: ['value'],
   data () {
     return {
       channelList: [], // 所有的频道
-      channelId: '' // 当前选中的频道
+      channelId: this.value // 当前选中的频道
     }
   },
   created () {
     this.loadChannels()
   },
+  watch: {
+    value: function (newVal, oldVal) {
+      console.log('传入子组件中的value发生了变化', Date.now, newVal)
+      this.channelId = newVal
+    }
+  },
   methods: {
+    // 用户修改了频道
+    hChange () {
+      console.log('用户修改了频道', this.channelId)
+
+      // this.$emit('change-channel', this.channelId)
+      this.$emit('input', this.channelId)
+    },
     async loadChannels () {
       // 发请求，获取频道列表数据
       const res = await this.$http({
@@ -39,6 +54,5 @@ export default {
       this.channelList = res.data.data.channels
     }
   }
-
 }
 </script>
