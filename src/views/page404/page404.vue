@@ -1,19 +1,18 @@
 <template>
-  <div>
-    这里是404
-    <!-- https://router.vuejs.org/zh/api/#router-back -->
-    <button @click="$router.back()">返回</button>
-    <button @click="$router.push('/')">返回主页</button>
-  </div>
+  <div class='container-404'></div>
 </template>
 
 <script>
-export default {
-  name: '404'
-
-}
+export default {}
 </script>
 
-<style>
-
+<style scoped lang='less'>
+.container-404{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../../assets/page404.gif) no-repeat center / cover;
+}
 </style>

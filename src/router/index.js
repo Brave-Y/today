@@ -29,13 +29,13 @@ const routes = [
     path: '/',
     component: Layout,
     children: [
-      { path: '', component: Home },
-      { path: '/articles', component: Article },
-      { path: '/image', component: image },
-      { path: '/addArticle', component: AddArticle },
-      { path: '/comment', component: Comment },
-      { path: '/fans', component: Fans },
-      { path: '/settings', component: Settings },
+      { path: '', component: Home, meta: { title: '首页' } },
+      { path: '/articles', component: Article, meta: { title: '内容管理' } },
+      { path: '/image', component: image, meta: { title: '素材管理' } },
+      { path: '/addArticle', component: AddArticle, meta: { title: '发布文章' } },
+      { path: '/comment', component: Comment, meta: { title: '评论管理' } },
+      { path: '/fans', component: Fans, meta: { title: '粉丝管理' } },
+      { path: '/settings', component: Settings, meta: { title: '个人设置' } },
       // 动态路由
       { path: '/edit/:id', component: edit }
     ]
@@ -65,6 +65,11 @@ export default router
 router.beforeEach((to, from, next) => {
   console.log(Date.now(), '路由跳转了')
   console.log(to, from, next)
+  if (to.meta.title) {
+    document.title = 'HMPC | ' + to.meta.title
+  } else {
+    document.title = 'HMPC'
+  }
   // 如果你要去的页面是 "VIP" 页面
   const pageList = ['/', '/image', '/articles', '/addArticle']
   // if (to.path === '/image' || to.path === '/article') {
