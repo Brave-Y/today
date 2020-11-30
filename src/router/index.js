@@ -2,27 +2,26 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 主页与登录页
-import login from '../views/login.vue'
-import Layout from '../views/layout.vue'
+const login = () => import('../views/login.vue')
+const Layout = () => import('../views/layout.vue')
 // 文章管理页
-import Article from '../views/articles/article.vue'
+const Article = () => import('../views/articles/article.vue')
 // 素材管理
-import image from '../views/image/image.vue'
+const image = () => import('../views/image/image.vue')
 // 编辑
-import edit from '../views/articles/edit.vue'
+const edit = () => import('../views/articles/edit.vue')
 // 添加页
-import AddArticle from '../views/articles/add.vue'
+const AddArticle = () => import('../views/articles/add.vue')
 // 评论管理
-import Comment from '../views/comment/comment.vue'
+const Comment = () => import('../views/comment/comment.vue')
 // 粉丝管理
-import Fans from '../views/fans/fans.vue'
+const Fans = () => import('../views/fans/fans.vue')
 // 个人设置
-import Settings from '../views/settings/settings.vue'
-
+const Settings = () => import('../views/settings/settings.vue')
 // home
-import Home from '../views/home/home.vue'
+const Home = () => import('../views/home/home.vue')
 // 404
-import Page404 from '../views/page404/page404.vue'
+const Page404 = () => import('../views/page404/page404.vue')
 
 Vue.use(VueRouter)
 const routes = [
