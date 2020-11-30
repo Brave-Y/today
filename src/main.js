@@ -28,6 +28,9 @@ Vue.component('MyCover', MyCover)
 // 把自己二次封装的axios挂载到vue的原型
 // 好处在于，在所有的vue的组件都可以通过this.$http来访问
 Vue.prototype.$http = axios
+// 用一个vue的实例来充当事件总线对象
+// 把它挂在原型上，则所有的组件都可以访问
+Vue.prototype.$eventBus = new Vue()
 
 // 以插件格式引入饿了么
 Vue.use(ElementUI)

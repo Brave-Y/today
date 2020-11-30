@@ -12,6 +12,13 @@ import image from '../views/image/image.vue'
 import edit from '../views/articles/edit.vue'
 // 添加页
 import AddArticle from '../views/articles/add.vue'
+// 评论管理
+import Comment from '../views/comment/comment.vue'
+// 粉丝管理
+import Fans from '../views/fans/fans.vue'
+// 个人设置
+import Settings from '../views/settings/settings.vue'
+
 // home
 import Home from '../views/home/home.vue'
 // 404
@@ -27,6 +34,9 @@ const routes = [
       { path: '/articles', component: Article },
       { path: '/image', component: image },
       { path: '/addArticle', component: AddArticle },
+      { path: '/comment', component: Comment },
+      { path: '/fans', component: Fans },
+      { path: '/settings', component: Settings },
       // 动态路由
       { path: '/edit/:id', component: edit }
     ]

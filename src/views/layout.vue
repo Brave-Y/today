@@ -87,6 +87,16 @@ export default {
     }
   },
   created () {
+    // 订阅事件。这个事件会从个人中心修改成功之后发出来
+    this.$eventBus.$on('update-user-info', (obj) => {
+      console.log('收到事件 update-user-info', obj)
+      if (obj.name) {
+        this.user.name = obj.name
+      }
+      if (obj.photo) {
+        this.user.photo = obj.photo
+      }
+    })
     this.loadProfile()
   },
   methods: {
